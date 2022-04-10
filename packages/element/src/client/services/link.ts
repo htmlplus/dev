@@ -1,4 +1,4 @@
-import { defineProperty, host } from '../utils/index.js';
+import { defineProperty, host } from '../utils';
 
 const links = new Map<string, any>();
 

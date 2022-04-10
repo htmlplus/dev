@@ -4,9 +4,9 @@ import { pascalCase, paramCase } from 'change-case';
 import fs from 'fs';
 import path from 'path';
 
-import * as CONSTANTS from '../../configs/constants.js';
-import { Context } from '../../types/index.js';
-import { hasDecorator, visitor } from '../utils/index.js';
+import * as CONSTANTS from '../../configs/constants';
+import { Context } from '../../types';
+import { hasDecorator, visitor } from '../utils';
 
 export interface ExtractOptions {
   prefix?: string;

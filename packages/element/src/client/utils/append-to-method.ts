@@ -1,4 +1,4 @@
-import { PlusElement } from '../../types/index.js';
+import { PlusElement } from '../../types';
 
 export const appendToMethod = (
   target: PlusElement,

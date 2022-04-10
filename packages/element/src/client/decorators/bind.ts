@@ -1,4 +1,4 @@
-import { defineProperty } from '../utils/index.js';
+import { defineProperty } from '../utils';
 
 export function Bind() {
   return function (target: Object, propertyKey: PropertyKey, descriptor: PropertyDescriptor) {

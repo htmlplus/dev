@@ -1,10 +1,10 @@
 import { html, render as renderer } from 'uhtml';
 
-import * as CONSTANTS from '../../configs/constants.js';
-import { PlusElement } from '../../types/index.js';
-import { call } from './call.js';
-import { getStyles } from './get-styles.js';
-import { host } from './host.js';
+import * as CONSTANTS from '../../configs/constants';
+import { PlusElement } from '../../types';
+import { call } from './call';
+import { getStyles } from './get-styles';
+import { host } from './host';
 
 export const render = (target: PlusElement): void => {
   const element = host(target);

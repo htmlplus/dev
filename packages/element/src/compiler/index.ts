@@ -1,2 +1,2 @@
-export { default as default } from './compiler.js';
-export * from './plugins/index.js';
+export { default as default } from './compiler';
+export * from './plugins';

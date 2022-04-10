@@ -1,8 +1,8 @@
 import t, { TSTypeAnnotation } from '@babel/types';
 
-import * as CONSTANTS from '../../configs/constants.js';
-import { Context } from '../../types/index.js';
-import { visitor } from '../utils/index.js';
+import * as CONSTANTS from '../../configs/constants';
+import { Context } from '../../types';
+import { visitor } from '../utils';
 
 const defaults: AttachOptions = {
   dependencies: true,

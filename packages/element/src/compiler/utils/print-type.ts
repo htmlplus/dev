@@ -1,4 +1,4 @@
-import { print } from './print.js';
+import { print } from './print';
 
 // TODO
 // args types

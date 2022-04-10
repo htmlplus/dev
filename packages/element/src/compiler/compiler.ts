@@ -1,6 +1,6 @@
 import logUpdate from 'log-update';
 
-import { Context, Plugin } from '../types/index.js';
+import { Context, Plugin } from '../types';
 
 const log = (namespace?: string, message?: string, persist?: boolean) => {
   logUpdate(`${new Date().toLocaleTimeString()} [@htmlplus/element]${namespace ? `[${namespace}]` : ''} ${message}`);

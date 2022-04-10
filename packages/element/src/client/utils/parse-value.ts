@@ -1,5 +1,5 @@
-import * as CONSTANTS from '../../configs/constants.js';
-import { toBoolean } from './to-boolean.js';
+import * as CONSTANTS from '../../configs/constants';
+import { toBoolean } from './to-boolean';
 
 // TODO: input type & validate date
 export const parseValue = (value: any, type: any): any => {

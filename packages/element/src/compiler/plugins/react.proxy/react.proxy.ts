@@ -1,4 +1,4 @@
-import { __dirname, isDirectoryEmpty, renderTemplate } from '../../utils/index.js';
+import { __dirname, isDirectoryEmpty, renderTemplate } from '../../utils';
 
 const defaults: ReactProxyOptions = {
   compact: false,

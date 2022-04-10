@@ -1,4 +1,4 @@
-import { PlusElement } from '../../types/index.js';
-import { direction } from './direction.js';
+import { PlusElement } from '../../types';
+import { direction } from './direction';
 
 export const isRTL = (target: PlusElement): boolean => direction(target) == 'rtl';

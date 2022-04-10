@@ -1,7 +1,7 @@
-import * as CONSTANTS from '../../configs/constants.js';
-import { PlusElement } from '../../types/index.js';
-import { appendToMethod, host, on, off } from '../utils/index.js';
-import { Bind } from './bind.js';
+import * as CONSTANTS from '../../configs/constants';
+import { PlusElement } from '../../types';
+import { appendToMethod, host, on, off } from '../utils';
+import { Bind } from './bind';
 
 const defaults: ListenOptions = {
   target: 'host'

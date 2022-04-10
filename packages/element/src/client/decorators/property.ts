@@ -1,4 +1,4 @@
-import { PlusElement } from '../../types/index.js';
+import { PlusElement } from '../../types';
 import {
   defineProperty,
   getMembers,
@@ -8,7 +8,7 @@ import {
   request,
   updateAttribute,
   onReady
-} from '../utils/index.js';
+} from '../utils';
 
 export interface PropertyOptions {
   /**

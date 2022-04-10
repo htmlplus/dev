@@ -1,5 +1,5 @@
-import { PlusElement } from '../../types/index.js';
-import { defineProperty, host } from '../utils/index.js';
+import { PlusElement } from '../../types';
+import { defineProperty, host } from '../utils';
 
 export type EventEmitter<T = any> = (data?: T) => CustomEvent<T>;
 

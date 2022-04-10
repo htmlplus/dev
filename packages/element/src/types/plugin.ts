@@ -1,4 +1,4 @@
-import { Context } from './context.js';
+import { Context } from './context';
 
 export type Return<T> = void | T | Promise<T>;
 

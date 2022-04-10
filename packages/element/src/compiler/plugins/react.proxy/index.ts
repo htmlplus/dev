@@ -1,1 +1,1 @@
-export * from './react.proxy.js';
+export * from './react.proxy';

@@ -1,10 +1,10 @@
-export * from './classes.js';
-export * from './direction.js';
-export * from './is-rtl.js';
-export * from './query.js';
-export * from './query-all.js';
-export * from './slots.js';
-export * from './styles.js';
-export * from './to-unit.js';
+export * from './classes';
+export * from './direction';
+export * from './is-rtl';
+export * from './query';
+export * from './query-all';
+export * from './slots';
+export * from './styles';
+export * from './to-unit';
 
-export { host, isServer, on, off } from '../utils/index.js';
+export { host, isServer, on, off } from '../utils';

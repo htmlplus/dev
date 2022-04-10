@@ -1,3 +1,3 @@
-export * from './context.js';
-export * from './plugin.js';
-export * from './plus-element.js';
+export * from './context';
+export * from './plugin';
+export * from './plus-element';

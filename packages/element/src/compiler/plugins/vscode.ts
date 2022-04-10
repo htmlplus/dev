@@ -2,8 +2,8 @@ import { paramCase } from 'change-case';
 import fs from 'fs';
 import path from 'path';
 
-import { Context } from '../../types/index.js';
-import { getTags, getType, printType } from '../utils/index.js';
+import { Context } from '../../types';
+import { getTags, getType, printType } from '../utils';
 
 export interface VscodeOptions {
   dist: string;
@@ -26,7 +26,7 @@ export const vscode = (options: VscodeOptions) => {
         const source = path.resolve(context.directoryPath || '', `${context.fileName}.md`);
 
         return fs.readFileSync(source, 'utf8');
-      } catch {}
+      } catch { }
     })();
 
     const description = (() => {

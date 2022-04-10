@@ -1,5 +1,5 @@
-import { PlusElement } from '../../types/index.js';
-import { defineProperty, host, onReady, request } from '../utils/index.js';
+import { PlusElement } from '../../types';
+import { defineProperty, host, onReady, request } from '../utils';
 
 export function State() {
   return function (target: PlusElement, propertyKey: PropertyKey) {
@@ -16,7 +16,7 @@ export function State() {
         values.set(this, input);
 
         request(this, { [propertyKey]: [input, value] })
-          .then(() => {})
+          .then(() => { })
           .catch((error) => {
             throw error;
           });

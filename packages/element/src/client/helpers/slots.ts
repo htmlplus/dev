@@ -1,6 +1,6 @@
-import { PlusElement } from '../../types/index.js';
-import { defineProperty } from '../utils/index.js';
-import { queryAll } from './query-all.js';
+import { PlusElement } from '../../types';
+import { defineProperty } from '../utils';
+import { queryAll } from './query-all';
 
 type Slots = {
   [key: string]: boolean;

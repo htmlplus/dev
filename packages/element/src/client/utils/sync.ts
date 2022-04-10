@@ -1,7 +1,7 @@
-import { on, off } from './event.js';
-import { isEvent } from './is-event.js';
-import { toEvent } from './to-event.js';
-import { updateAttribute } from './update-attribute.js';
+import { on, off } from './event';
+import { isEvent } from './is-event';
+import { toEvent } from './to-event';
+import { updateAttribute } from './update-attribute';
 
 export const sync = (node: HTMLElement) => {
   let prev: any = {};
