@@ -1,9 +1,13 @@
 import t from '@babel/types';
 import fs from 'fs';
+import less from 'less';
 import path from 'path';
+import stylus from 'stylus';
 
 import * as CONSTANTS from '../../constants/index.js';
 import { Context } from '../../types/index.js';
+
+console.log(less);
 
 const defaults: StyleOptions = {
   extensions: ['scss', 'css'],
@@ -20,6 +24,18 @@ export type StyleOptions = {
   directory?: (context: Context) => string;
   filename?: (context: Context) => string;
 };
+
+async function stylusLoader(context) {
+  const fileContent = fs.readFileSync(context.stylePath!, 'utf-8');
+  const result = stylus(fileContent);
+
+  if (result) {
+    context.styleParsed = result.render();
+    context.styleDependencies = result.deps();
+  }
+}
+
+async function scssLoader(context: Context) {}
 
 export const style = (options: StyleOptions) => {
   const name = 'style';
@@ -39,6 +55,8 @@ export const style = (options: StyleOptions) => {
     }
 
     if (!context.stylePath) return;
+
+    // context.parse
 
     context.fileAST!.program.body.unshift(
       t.importDeclaration(
