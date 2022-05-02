@@ -2,6 +2,7 @@ import t from '@babel/types';
 import fs from 'fs';
 import less from 'less';
 import path from 'path';
+import sass from 'sass';
 import stylus from 'stylus';
 
 import * as CONSTANTS from '../../constants/index.js';
@@ -10,28 +11,44 @@ import { Context } from '../../types/index.js';
 console.log(less);
 
 const resolvers = {
-  async css(context: Context) {
-    return fs.readFileSync(context.stylePath!, 'utf-8');
+  css() {
+    return async (context: Context) => {
+      return fs.readFileSync(context.stylePath!, 'utf-8');
+    };
   },
-  async less(context: Context) {
-    console.log("less: ", less)
-    return 'TODO'
+  less() {
+    return async (context: Context) => {
+      console.log('less: ', less);
+      return 'TODO';
+    };
   },
-  async styl(context: Context) {
-    const fileContent = fs.readFileSync(context.stylePath!, 'utf-8');
-    const result = stylus(fileContent);
-    
-    if (result) {
-      context.styleDependencies = result.deps();
-      context.styleParsed = result.render();
-    }
-    return context.styleParsed;
-  },
-  async scss(context: Context) {
-    console.log('TODO')
-  }
+  styl() {
+    return async (context: Context) => {
+      const fileContent = fs.readFileSync(context.stylePath!, 'utf-8');
+      const result = stylus(fileContent);
 
-}
+      if (result) {
+        context.styleDependencies = result.deps();
+        context.styleParsed = result.render();
+      }
+      return context.styleParsed;
+    };
+  },
+  scss(options) {
+    return async (context: Context) => {
+      const { css, loadedUrls } = sass.compile(context.stylePath!, {
+        ...(options || {}),
+        style: 'compressed'
+      });
+
+      context.styleParsed = css.toString();
+
+      // TODO loadedUrls;
+      context.styleDependencies = [];
+      return context.styleParsed;
+    };
+  }
+};
 
 const defaults: StyleOptions = {
   extensions: ['scss', 'css', 'styl', 'less'],
@@ -42,8 +59,8 @@ const defaults: StyleOptions = {
     return context.fileName!;
   },
   resolver(context: Context) {
-    const extension = context.filePath!.split('.').pop();
-    return resolvers[extension!](context);
+    const extension = context.stylePath!.split('.').pop();
+    return resolvers[extension!]()(context);
   }
 };
 
@@ -59,7 +76,7 @@ export const style = (options: StyleOptions) => {
 
   options = { ...defaults, ...options };
 
-  const next = (context: Context) => {
+  const next = async (context: Context) => {
     const filename = options.filename!(context);
 
     const directory = options.directory!(context);
@@ -74,10 +91,7 @@ export const style = (options: StyleOptions) => {
 
     if (!context.stylePath) return;
 
-    
-
-
-    context.styleParsed = await options.resolver(context);
+    context.styleParsed = await options.resolver!(context);
     // context.parse
 
     // context.fileAST!.program.body.unshift(
@@ -87,9 +101,7 @@ export const style = (options: StyleOptions) => {
     //   )
     // );
 
-
     if (context.styleParsed) {
-
       context.class!.body.body.unshift(
         t.classProperty(
           t.identifier(CONSTANTS.STATIC_STYLES),
@@ -98,9 +110,9 @@ export const style = (options: StyleOptions) => {
           null,
           undefined,
           true
-          )
-          );
-        }
+        )
+      );
+    }
 
     // context.class!.body.body.unshift(
     //   t.classProperty(

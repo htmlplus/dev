@@ -31,6 +31,11 @@ createServer({
         await start();
       },
       async load(id) {
+        // console.log(`load(${id})`);
+        // if (['scss', 'less', 'css', 'styl'].includes(id)) {
+        //   return true;
+        // }
+
         if (!id.endsWith('.tsx')) return;
         const { isInvalid, script } = await next(id);
         if (isInvalid) return;
