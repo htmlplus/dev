@@ -1,9 +1,6 @@
 import { createServer } from 'vite';
 
-import compiler from '../../../dist/compiler/index.js';
-import { customElement, extract, parse, read, style, validate } from '../../../dist/compiler/index.js';
-
-const { start, next, finish } = compiler(read(), parse(), validate(), extract(), style(), customElement());
+import { extract, parse, validate } from '../../../dist/compiler/rollup-index.js';
 
 createServer({
   root: 'src/dev',
@@ -26,19 +23,35 @@ createServer({
   },
   plugins: [
     {
-      name: 'htmlplus',
-      async buildStart() {
-        await start();
-      },
-      async load(id) {
+      name: 'init',
+      transform(code, id) {
         if (!id.endsWith('.tsx')) return;
-        const { isInvalid, script } = await next(id);
+
+        this.getModuleInfo(id).meta = {
+          filePath: id
+        };
+      }
+    },
+    parse(),
+    validate(),
+    extract(),
+    {
+      name: 'htmlplus',
+      // async buildStart() {
+      //   await start();
+      // },
+      async transform(code, id) {
+        if (!id.endsWith('.tsx')) return;
+        const context = this.getModuleInfo(id).meta;
+
+        console.log(context);
+        const { isInvalid, script } = context;
         if (isInvalid) return;
         return script.replace('.scss', '.scss?inline');
-      },
-      async buildEnd() {
-        await finish();
       }
+      // async buildEnd() {
+      //   await finish();
+      // }
     }
   ]
 })
